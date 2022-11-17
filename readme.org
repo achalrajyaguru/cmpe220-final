@@ -1,11 +1,10 @@
 * Responsibilities
 | Member  | Focus                       |
 |---------+-----------------------------|
-| Kin     | Frontend UI and Kubernetes  |
-| Mehul   | Database Table Design       |
-| Priyank | Frontend UI                 |
-| Mahesh  | Backend API, serving data   |
-| Neel    | Backend, query data from DB |
+| Achal     | Frontend UI and Kubernetes  |
+| Maryam   | Database Table Design       |
+| Hewitt  | Backend API, serving data   |
+| Ritu    | Backend, query data from DB |
 * Getting Started (tested on M1 Mac and Ubuntu 20.04)
 ** Install Docker, Minikube, and Docker
 *** Mac
