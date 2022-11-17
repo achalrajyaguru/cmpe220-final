@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+    name:   sjsump-frontend-svc
+
+spec:
+    type: LoadBalancer
+    selector:
+        app:   sjsump-frontend
+    ports:
+        -   port: 80
+            targetPort: 3000
+            name: sjsump-frontend-port

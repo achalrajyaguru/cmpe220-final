@@ -1,0 +1,51 @@
+* Responsibilities
+| Member  | Focus                       |
+|---------+-----------------------------|
+| Kin     | Frontend UI and Kubernetes  |
+| Mehul   | Database Table Design       |
+| Priyank | Frontend UI                 |
+| Mahesh  | Backend API, serving data   |
+| Neel    | Backend, query data from DB |
+* Getting Started (tested on M1 Mac and Ubuntu 20.04)
+** Install Docker, Minikube, and Docker
+*** Mac
+1) Install development packages on Mac using ~xcode-select --install~
+2) Install Docker, use [[https://www.docker.com/products/docker-desktop][Docker Desktop]], launch and configure resouces CPU to at least 4 and Memory to at least 8GB
+3) Install Minikube, use ~brew install minikube~ or follow [[https://minikube.sigs.k8s.io/docs/start/][the official guide]]
+*** Linux
+1) Run ~./install_prereq_linux.sh~ in root directory to install Docker, Minikube, and Kubectl
+** Build and Deploy App
+1) Run ~./build_app.sh~ in root directory: it will start a minikube cluster and build all images within
+2) Run ~./deploy_app.sh~ in root directory: it will deploy app inside k8s cluster
+3) Wait for a few minutes for Cassandra to start up, then run ~./init_db.sh~ to create keyspace and tables.
+4) Run ~./start_dev.sh~ in root directory to spin up dashboard and tunnel to start developing!
+* Resources
+- Frontend: [[https://nextjs.org/learn/foundations/about-nextjs?utm_source=next-site&utm_medium=homepage-cta&utm_campaign=next-website][next.js]]
+- Backend Server: [[https://fastapi.tiangolo.com/tutorial/][fastapi (python)]] or [[https://expressjs.com/en/5x/api.html][express.js (node)]]
+- [[https://docs.datastax.com/en/developer/python-driver/3.25/api/][DataStax Python Driver 3.25]]
+- [[https://javascript.plainenglish.io/getting-started-with-docker-and-apache-cassandra-eeb1fcd89988][Getting Started With Docker And Apache Cassandra]]
+  + Run ~cqlsh~ inside the container bash to start the Cassandra CLI
+- [[https://www.kyrelldixon.com/blog/setup-nextjs-with-tailwindcss-and-typescript][How to setup Next.js with Tailwind CSS and TypeScript]]
+- [[https://github.com/bitnami/charts/tree/master/bitnami/cassandra/#installing-the-chart][Cassandra Helm Chart]]
+* Setting up Minikube for local Kubenetes
+#+begin_src shell
+# install from brew, or choose your platform from https://minikube.sigs.k8s.io/docs/start
+brew install minikube
+minikube start
+minikube dashboard # UI to easy view activities
+#+end_src
+* Installing Helm (package manager in Kubenetes)
+#+begin_src shell
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+#+end_src
+* Notes
+#+begin_src shell
+helm install my-release bitnami/cassandra
+kubectl create namespace sjsump
+eval $(minikube -p minikube docker-env)
+minikube service sjsump-frontend-svc
+minikube start --cpus='6' —-nodes=2 --memory="11g" --kubernetes-version=v1.23.3 --driver=docker
+kubectl logs -l app=sjsump-api -f
+#+end_src
